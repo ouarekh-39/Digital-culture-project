@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://digital-culture-project-theta.vercel.app/sitemap.xml
