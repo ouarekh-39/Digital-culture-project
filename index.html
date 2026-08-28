@@ -192,6 +192,35 @@
 
         /* بطاقات الوثائق */
         .doc-card { background: #fff; border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border); display: flex; align-items: center; gap: 1.25rem; transition: all 0.3s; }
+
+        /* ===== منظومة التنفيذ ===== */
+        .eco-flow { display:flex; align-items:stretch; justify-content:center; gap:14px; flex-wrap:wrap; }
+        .eco-node { flex:1 1 260px; max-width:300px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); border-radius:20px; padding:28px 22px; text-align:center; backdrop-filter:blur(10px); }
+        .eco-icon { width:60px; height:60px; border-radius:16px; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; font-size:22px; color:#fff; }
+        .eco-node h4 { font-family:'Cairo',sans-serif; font-weight:700; color:#fff; font-size:18px; margin-bottom:10px; }
+        .eco-node p { color:rgba(255,255,255,0.6); font-size:14px; line-height:1.9; }
+        .eco-arrow { display:flex; align-items:center; justify-content:center; color:var(--accent-400); font-size:20px; flex:0 0 auto; }
+        @media (max-width:900px){ .eco-arrow{ transform:rotate(90deg); } }
+        .lib-input { width:100%; border:1px solid var(--border); border-radius:10px; padding:11px 14px; font-family:'Tajawal',sans-serif; font-size:14.5px; color:var(--text); background:var(--bg); transition:.2s; }
+        .lib-input:focus { outline:none; border-color:var(--primary-500); background:#fff; }
+
+        /* ===== الأسئلة الشائعة (FAQ) ===== */
+        .faq-item { background:#fff; border:1px solid var(--border); border-radius:14px; margin-bottom:12px; overflow:hidden; }
+        .faq-q { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:18px 22px; cursor:pointer; font-weight:bold; color:var(--primary-900); font-family:'Cairo',sans-serif; }
+        .faq-q i { transition:transform .3s; color:var(--primary-500); flex-shrink:0; }
+        .faq-item.open .faq-q i { transform:rotate(180deg); }
+        .faq-a { max-height:0; overflow:hidden; transition:max-height .35s ease; }
+        .faq-item.open .faq-a { max-height:300px; }
+        .faq-a p { padding:0 22px 18px; color:var(--muted); line-height:1.9; }
+
+        /* ===== زر المشاركة والتنزيل في صفحة النتائج ===== */
+        .result-actions { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px; margin-top:14px; }
+        .btn-share, .btn-download { border:1px solid var(--border); background:#fff; color:var(--primary-800); border-radius:12px; padding:11px 22px; font-weight:bold; font-size:14px; cursor:pointer; transition:.2s; display:inline-flex; align-items:center; gap:8px; }
+        .btn-share:hover, .btn-download:hover { background:var(--bg); transform:translateY(-2px); }
+        .compare-badge { display:inline-flex; align-items:center; gap:8px; margin-top:14px; padding:8px 18px; border-radius:999px; font-size:13.5px; font-weight:bold; }
+        .compare-badge.up { background:#E8F8F5; color:#0E8A7F; }
+        .compare-badge.down { background:#FFF3EC; color:#B4552C; }
+        .compare-badge.same { background:var(--bg-alt); color:var(--muted); }
         .doc-card:hover { border-color: var(--primary-500); box-shadow: 0 8px 24px rgba(6,42,53,0.08); }
 
         /* الأزرار */
@@ -298,29 +327,34 @@
         .transition-screen { text-align:center; padding:70px 42px; }
         .results { text-align:center; }
         .scoreHero { margin:28px 0; display:flex; align-items:center; justify-content:center; gap:30px; padding:32px; border-radius:24px; background:linear-gradient(135deg,var(--primary-900),var(--primary-800)); color:white; box-shadow:0 15px 35px rgba(6,42,53,.2); }
-        .circle { width:140px; height:140px; border-radius:50%; border:6px solid rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; flex-direction:column; background:rgba(255,255,255,0.05); }
-        .circle span { font-size:38px; font-weight:bold; color:var(--accent-400); font-family:'Cairo',sans-serif; }
-        .circle small { color:rgba(255,255,255,0.6); }
+
+        /* ===== مؤشرات السرعة الدائرية (Gauges) ===== */
+        .gauge-wrap { position:relative; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+        .gauge-wrap svg { display:block; transform:rotate(0deg); }
+        .gauge-track { fill:none; stroke:rgba(255,255,255,0.14); stroke-linecap:round; stroke-width:14; }
+        .gauge-value { fill:none; stroke-linecap:round; stroke-width:14; stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset 1.5s cubic-bezier(.22,1,.36,1); }
+        .gauge-center { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+        .main-gauge { width:190px; height:190px; }
+        .main-gauge svg { width:190px; height:190px; }
+        .gauge-center span#total { font-size:38px; font-weight:bold; color:var(--accent-400); font-family:'Cairo',sans-serif; }
+        .gauge-center small { color:rgba(255,255,255,0.6); }
         .rlevel { font-size:26px; font-weight:bold; color:#fff; margin-top:6px; font-family:'Cairo',sans-serif; }
         .rgrid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; text-align:right; margin-top:8px; }
-        .rcard { border-radius:20px; padding:22px; border:1px solid transparent; transition:transform .2s; }
+        .rcard { border-radius:20px; padding:20px; border:1px solid transparent; transition:transform .2s; }
         .rcard:hover { transform:translateY(-3px); }
         .rcard.axis-1{background:var(--a1-bg);border-color:var(--a1-border);color:var(--a1-primary)}
-        .rcard.axis-1 strong{color:var(--a1-primary)}
-        .rcard.axis-1 .meter span{background:linear-gradient(90deg,var(--a1-secondary),var(--a1-primary))}
         .rcard.axis-2{background:var(--a2-bg);border-color:var(--a2-border);color:var(--a2-primary)}
-        .rcard.axis-2 strong{color:var(--a2-primary)}
-        .rcard.axis-2 .meter span{background:linear-gradient(90deg,var(--a2-secondary),var(--a2-primary))}
         .rcard.axis-3{background:var(--a3-bg);border-color:var(--a3-border);color:#8A6420}
-        .rcard.axis-3 strong{color:#8A6420}
-        .rcard.axis-3 .meter span{background:linear-gradient(90deg,var(--a3-secondary),var(--a3-primary))}
         .rcard.axis-4{background:var(--a4-bg);border-color:var(--a4-border);color:var(--a4-primary)}
-        .rcard.axis-4 strong{color:var(--a4-primary)}
-        .rcard.axis-4 .meter span{background:linear-gradient(90deg,var(--a4-secondary),var(--a4-primary))}
-        .row { display:flex; justify-content:space-between; gap:12px; align-items:center; font-weight:bold; font-size:16px; }
-        .rcard strong { font-size:26px; font-family:'Cairo',sans-serif; }
-        .meter { height:10px; background:rgba(0,0,0,0.06); border-radius:20px; overflow:hidden; margin:15px 0 10px; }
-        .meter span { display:block; height:100%; border-radius:20px; }
+        .gauge-row { display:flex; align-items:center; gap:14px; }
+        .mini-gauge { width:86px; height:86px; }
+        .mini-gauge svg { width:86px; height:86px; }
+        .mini-gauge .gauge-track { stroke-width:9; stroke:rgba(0,0,0,0.08); }
+        .mini-gauge .gauge-value { stroke-width:9; }
+        .mini-gauge .gauge-center strong { font-size:19px; font-family:'Cairo',sans-serif; }
+        .gauge-info { display:flex; flex-direction:column; gap:5px; text-align:right; flex:1; min-width:0; }
+        .gi-title { font-weight:bold; font-size:15px; line-height:1.4; }
+        .gi-level { font-size:12.5px; font-weight:bold; opacity:.85; }
         .box { margin-top:20px; border-radius:20px; padding:24px; background:#fff; border:1px solid var(--border); text-align:right; box-shadow:0 4px 15px rgba(6,42,53,.03); }
         .box h3 { color:var(--primary-900); margin-bottom:12px; }
         .box p { color:#475569; line-height:1.9; margin:0; }
@@ -352,6 +386,19 @@
             .scoreHero { flex-direction:column; text-align:center; padding:24px; }
             .rgrid { grid-template-columns:1fr; }
         }
+
+        @media print {
+            nav, .mobile-menu, .mobile-overlay, #hamburger-btn, #scroll-top, #toast,
+            .nav-quiz-btn, .btn-share, .btn-download, .result-actions, #studentNameInput,
+            #goToAxisBtn, .back, .restart, footer .flex.flex-wrap, #progress-bar,
+            #libraryForm button, section#home .float-a, section#home .float-b, .hero-grid, .geo-shape { display: none !important; }
+            body { background: #fff !important; }
+            section { background: #fff !important; page-break-inside: avoid; padding: 20px 4px !important; }
+            .eco-node, .rcard, .box, .doc-card, .faq-item { border: 1px solid #ccc !important; break-inside: avoid; }
+            a[href]:after { content: none !important; }
+            * { box-shadow: none !important; text-shadow: none !important; color: #111 !important; background: transparent !important; }
+            h1, h2, h3, h4 { color: #000 !important; }
+        }
     </style>
 </head>
 <body>
@@ -374,7 +421,10 @@
                 <a class="nav-link" data-nav="home" data-target="axes">المحاور</a>
                 <a class="nav-link" data-nav="home" data-target="references">المرجعيات</a>
                 <a class="nav-link" data-nav="home" data-target="documents">الوثائق</a>
+                <a class="nav-link" data-nav="home" data-target="partners">الشركاء</a>
+                <a class="nav-link" data-nav="home" data-target="faq">الأسئلة الشائعة</a>
                 <a class="nav-link" data-nav="home" data-target="about">حول المشروع</a>
+                <a class="nav-link" data-nav="libraries" style="color:var(--accent-400)">بوابة المكتبات</a>
                 <a class="nav-quiz-btn" data-nav="quiz"><i class="fas fa-clipboard-check"></i> اختبر ثقافتك</a>
             </div>
             <button class="hamburger lg:hidden p-2 bg-transparent border-none cursor-pointer" id="hamburger-btn" aria-label="فتح القائمة">
@@ -392,7 +442,10 @@
     <a class="mobile-nav-link" data-nav="home" data-target="axes">المحاور</a>
     <a class="mobile-nav-link" data-nav="home" data-target="references">المرجعيات</a>
     <a class="mobile-nav-link" data-nav="home" data-target="documents">الوثائق</a>
+    <a class="mobile-nav-link" data-nav="home" data-target="partners">الشركاء</a>
+    <a class="mobile-nav-link" data-nav="home" data-target="faq">الأسئلة الشائعة</a>
     <a class="mobile-nav-link" data-nav="home" data-target="about">حول المشروع</a>
+    <a class="mobile-nav-link" data-nav="libraries" style="color:var(--accent-400)"><i class="fas fa-university"></i> بوابة المكتبات</a>
     <a class="mobile-nav-link" data-nav="quiz" style="color:var(--accent-400)"><i class="fas fa-clipboard-check"></i> اختبر ثقافتك الرقمية</a>
 </div>
 
@@ -549,6 +602,42 @@
     </div>
 </section>
 
+<section id="ecosystem" class="py-24 px-4" style="background:var(--primary-900);position:relative;overflow:hidden">
+    <div class="max-w-5xl mx-auto relative">
+        <div class="text-center mb-16 reveal">
+            <div class="eyebrow" style="color:var(--accent-400)">منظومة التنفيذ</div>
+            <h2 class="font-heading text-3xl sm:text-4xl mb-4" style="color:#fff;font-weight:800">من الاستراتيجية إلى الطالب</h2>
+            <p class="max-w-2xl mx-auto" style="color:rgba(255,255,255,0.65);line-height:2">
+                تُنفَّذ الاستراتيجية الوطنية عبر منظومة من ثلاث حلقات مترابطة، وتلعب المكتبة الجامعية فيها دور الجهة المنفّذة التي تربط الإطار الوطني بالطالب المستفيد.
+            </p>
+        </div>
+        <div class="eco-flow">
+            <div class="eco-node reveal reveal-d1">
+                <div class="eco-icon" style="background:linear-gradient(135deg,var(--accent-400),var(--accent-500))"><i class="fas fa-scroll"></i></div>
+                <h4>الاستراتيجية الوطنية</h4>
+                <p>الإطار التوجيهي الذي يحدّد المحاور والأهداف العامة لبرامج التدريب في الثقافة الرقمية.</p>
+            </div>
+            <div class="eco-arrow"><i class="fas fa-arrow-left"></i></div>
+            <div class="eco-node reveal reveal-d2">
+                <div class="eco-icon" style="background:linear-gradient(135deg,var(--primary-500),var(--primary-700))"><i class="fas fa-university"></i></div>
+                <h4>المكتبة الجامعية</h4>
+                <p>الجهة المنفّذة: تُنظّم التكوين، وتستخدم أداة القياس لتحديد الاحتياجات التدريبية قبل التكوين وقياس الأثر بعده.</p>
+            </div>
+            <div class="eco-arrow"><i class="fas fa-arrow-left"></i></div>
+            <div class="eco-node reveal reveal-d3">
+                <div class="eco-icon" style="background:linear-gradient(135deg,#3FC4AF,#0F766E)"><i class="fas fa-graduation-cap"></i></div>
+                <h4>الطالب الجامعي</h4>
+                <p>المستفيد النهائي: يخضع للتقييم الذاتي، ويُوجَّه بناءً على نتيجته نحو التكوين المناسب عبر مكتبته.</p>
+            </div>
+        </div>
+        <div class="text-center mt-14 reveal reveal-d3">
+            <button class="nav-quiz-btn" data-nav="libraries" style="position:static">
+                <i class="fas fa-university"></i> أنتم مسؤول مكتبة جامعية؟ تعرّف على دوركم
+            </button>
+        </div>
+    </div>
+</section>
+
 <section id="axes" class="py-24 px-4" style="background:var(--bg)">
     <div class="max-w-5xl mx-auto">
         <div class="text-center mb-14 reveal">
@@ -557,7 +646,7 @@
             <p class="text-lg max-w-2xl mx-auto" style="color:var(--muted)">اضغط على كل محور للاطلاع على تفاصيله</p>
         </div>
         <div class="grid sm:grid-cols-2 gap-6">
-            <div class="axis-card reveal reveal-d1" data-axis>
+            <div class="axis-card reveal reveal-d1" data-axis id="axisDetail1">
                 <div class="axis-header flex items-center justify-between p-6 pb-4">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:linear-gradient(135deg,#E8F8F5,#D1F2ED)">
@@ -571,7 +660,7 @@
                     <p class="leading-relaxed" style="color:var(--muted)">يركز هذا المحور على تنمية قدرة الطلبة على التعامل مع المعلومات والتكنولوجيا في البيئة الأكاديمية، من خلال تطوير مهارات البحث والوصول إلى المعلومات، واختيار أدوات البحث المناسبة، وتقييم مصادر المعلومات الرقمية، وتوظيف التقنيات والمنصات الرقمية بما يخدم التعلم والبحث العلمي.</p>
                 </div>
             </div>
-            <div class="axis-card reveal reveal-d2" data-axis>
+            <div class="axis-card reveal reveal-d2" data-axis id="axisDetail2">
                 <div class="axis-header flex items-center justify-between p-6 pb-4">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:linear-gradient(135deg,#E8F8F5,#D1F2ED)">
@@ -585,7 +674,7 @@
                     <p class="leading-relaxed" style="color:var(--muted)">يهتم هذا المحور بتطوير قدرة الطلبة على استخدام الوسائط والأدوات الرقمية في التواصل والتفاعل والعمل المشترك، بما يمكنهم من المشاركة الفاعلة في البيئات الأكاديمية الرقمية، وتبادل المعلومات والمعارف، والتعاون في إنجاز المهام والمشروعات بصورة فعالة ومسؤولة.</p>
                 </div>
             </div>
-            <div class="axis-card reveal reveal-d3" data-axis>
+            <div class="axis-card reveal reveal-d3" data-axis id="axisDetail3">
                 <div class="axis-header flex items-center justify-between p-6 pb-4">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:linear-gradient(135deg,#FFF8EB,#FFF3DC)">
@@ -599,7 +688,7 @@
                     <p class="leading-relaxed" style="color:var(--muted)">يركز هذا المحور على بناء وعي الطلبة بهويتهم وحضورهم في البيئة الرقمية، وتعزيز قدرتهم على إدارة حضورهم الأكاديمي الرقمي وإنتاج المحتوى الرقمي وتوظيف الأدوات التكنولوجية بصورة إبداعية، بما يدعم التعلم والتعبير عن المعرفة والمشاركة في البيئة الأكاديمية.</p>
                 </div>
             </div>
-            <div class="axis-card reveal reveal-d4" data-axis>
+            <div class="axis-card reveal reveal-d4" data-axis id="axisDetail4">
                 <div class="axis-header flex items-center justify-between p-6 pb-4">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:linear-gradient(135deg,#FFF8EB,#FFF3DC)">
@@ -731,6 +820,56 @@
     </div>
 </section>
 
+<section id="partners" class="py-24 px-4" style="background:var(--bg)">
+    <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-14 reveal">
+            <div class="eyebrow">شركاء التنفيذ</div>
+            <h2 class="font-heading text-3xl sm:text-4xl mb-4" style="color:var(--primary-900);font-weight:800">المكتبات الجامعية الشريكة</h2>
+            <div class="section-line mx-auto"></div>
+        </div>
+        <div id="partnersList" class="rgrid" style="grid-template-columns:repeat(3,1fr)"></div>
+        <div id="partnersEmpty" class="text-center reveal reveal-d1" style="max-width:560px;margin:0 auto;padding:36px 28px;border:2px dashed var(--border);border-radius:20px">
+            <i class="fas fa-university text-3xl mb-4" style="color:var(--primary-400)"></i>
+            <p style="color:var(--muted);line-height:2;margin-bottom:18px">لم تنضم أي مكتبة بعد كشريك معتمد رسميًا. إن كانت مكتبتكم الجامعية مهتمة باعتماد أداة القياس وبرنامج التكوين المرتبط بها، يسعدنا التواصل معكم.</p>
+            <button class="nav-quiz-btn" data-nav="libraries" style="position:static"><i class="fas fa-handshake"></i> كونوا أول شريك</button>
+        </div>
+    </div>
+</section>
+
+<section id="faq" class="py-24 px-4" style="background:linear-gradient(180deg,#FFF8EB 0%,var(--bg) 100%)">
+    <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-6 reveal">
+            <h2 class="font-heading text-3xl sm:text-4xl mb-3" style="color:var(--primary-900);font-weight:800">الأسئلة الشائعة</h2>
+            <div class="section-line mx-auto mb-6"></div>
+        </div>
+        <p class="text-center text-lg max-w-2xl mx-auto mb-14 reveal reveal-d1" style="color:var(--muted);line-height:2">
+            إجابات عن أكثر الأسئلة تكراراً حول الاستراتيجية الوطنية وأداة قياس الثقافة الرقمية.
+        </p>
+        <div id="faqList">
+            <div class="faq-item reveal reveal-d1">
+                <div class="faq-q"><span>ما المقصود بـ"الثقافة الرقمية" في سياق هذه الاستراتيجية؟</span><i class="fas fa-chevron-down"></i></div>
+                <div class="faq-a"><p>الثقافة الرقمية هي مجموعة المعارف والمهارات والمواقف التي تُمكّن الطالب من استخدام الأدوات والموارد الرقمية بفعالية وأمان ومسؤولية في بيئته الأكاديمية والمهنية، وتشمل محاور مثل الثقافة المعلوماتية والتواصل الرقمي وإنشاء المحتوى والأمن الرقمي وحل المشكلات التقنية.</p></div>
+            </div>
+            <div class="faq-item reveal reveal-d2">
+                <div class="faq-q"><span>كم من الوقت يستغرق إكمال أداة القياس؟</span><i class="fas fa-chevron-down"></i></div>
+                <div class="faq-a"><p>يستغرق إكمال جميع أسئلة الاستبيان عادة ما بين 8 إلى 12 دقيقة، حسب سرعة قراءتك وتفكيرك في كل عبارة. يمكنك التنقل بين الأسئلة بحرية باستخدام زرَي "التالي" و"السابق" دون أي ضغط زمني.</p></div>
+            </div>
+            <div class="faq-item reveal reveal-d3">
+                <div class="faq-q"><span>هل نتيجتي محفوظة أو مرئية لأي جهة أخرى؟</span><i class="fas fa-chevron-down"></i></div>
+                <div class="faq-a"><p>لا. تُحسب النتيجة بالكامل داخل متصفحك فقط، ولا تُرسَل إلى أي خادم أو جهة خارجية. يُحفَظ آخر تقييم فقط محلياً في متصفحك (إن أردت مقارنته بمحاولة لاحقة)، ويمكنك مسحه في أي وقت من إعدادات المتصفح.</p></div>
+            </div>
+            <div class="faq-item reveal reveal-d4">
+                <div class="faq-q"><span>هل يمكنني إعادة الاختبار أكثر من مرة؟</span><i class="fas fa-chevron-down"></i></div>
+                <div class="faq-a"><p>نعم، ويُنصح بذلك فعلياً بعد فترة من التدرّب على المحاور التي ظهرت لديك كنقاط ضعف. عند إعادة التقييم ستظهر لك مقارنة تلقائية بنتيجتك السابقة لمتابعة تطورك.</p></div>
+            </div>
+            <div class="faq-item reveal reveal-d1">
+                <div class="faq-q"><span>ماذا أفعل بعد معرفة نتيجتي؟</span><i class="fas fa-chevron-down"></i></div>
+                <div class="faq-a"><p>تعرض لك صفحة النتائج توصيات مخصّصة لكل محور بحسب أدائك فيه، بالإضافة إلى تحديد المحور الأولى بالتطوير. يمكنك أيضاً تنزيل نتيجتك كصورة للاحتفاظ بها أو تقديمها كدليل إنجاز لأستاذ المقرر.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section id="about" class="py-24 px-4 relative overflow-hidden" style="background:linear-gradient(160deg,#062A35 0%,#0C4A5E 50%,#0E6A7E 100%)">
     <div class="hero-grid absolute inset-0 opacity-50"></div>
     <div class="absolute top-0 left-0 w-96 h-96 rounded-full" style="background:radial-gradient(circle,rgba(18,166,142,0.1) 0%,transparent 70%)"></div>
@@ -774,6 +913,89 @@
 </section>
 
 </div><!-- /page-home -->
+
+<!-- ============ الصفحة الثالثة: بوابة المكتبات الجامعية ============ -->
+<div id="page-libraries" style="display:none">
+    <section class="py-24 px-4 min-h-screen" style="background:linear-gradient(160deg,#062A35 0%,#0C4A5E 45%,#0E6A7E 100%)">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-14">
+                <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6" style="background:linear-gradient(135deg,var(--accent-400),var(--accent-500))">
+                    <i class="fas fa-university text-2xl text-white"></i>
+                </div>
+                <div class="eyebrow" style="color:var(--accent-400)">موجّهة لأخصائيي المكتبات الجامعية</div>
+                <h1 class="font-heading text-3xl sm:text-4xl mb-4" style="color:#fff;font-weight:800">بوابة المكتبات الجامعية</h1>
+                <p class="max-w-xl mx-auto" style="color:rgba(255,255,255,0.65);line-height:2">
+                    الاستراتيجية الوطنية للثقافة الرقمية تُوجَّه بالأساس إلى المكتبات الجامعية بصفتها الجهة المكلَّفة بتنفيذ برامج التدريب. هذه الصفحة توضّح دوركم العملي وتفتح قناة تواصل مباشرة معنا.
+                </p>
+            </div>
+
+            <div class="rounded-2xl p-7 sm:p-9 mb-8" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(10px)">
+                <h3 class="font-heading text-xl mb-5" style="color:var(--accent-400);font-weight:700"><i class="fas fa-lightbulb"></i> بماذا تستفيد مكتبتكم من الأداة؟</h3>
+                <div class="grid sm:grid-cols-2 gap-5">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-search text-lg mt-1" style="color:var(--accent-400)"></i>
+                        <p style="color:rgba(255,255,255,0.75);line-height:1.9;font-size:14.5px"><strong style="color:#fff">تشخيص الاحتياجات:</strong> اطلبوا من طلبتكم اجتياز الأداة قبل تنظيم أي دورة، لتحديد المحاور الأضعف فعليًا بدل الافتراض.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-chalkboard text-lg mt-1" style="color:var(--accent-400)"></i>
+                        <p style="color:rgba(255,255,255,0.75);line-height:1.9;font-size:14.5px"><strong style="color:#fff">مادة توعوية جاهزة:</strong> أحيلوا الطلبة الجدد على الموقع مباشرة بدل إعداد عرض تعريفي من الصفر.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-arrow-up text-lg mt-1" style="color:var(--accent-400)"></i>
+                        <p style="color:rgba(255,255,255,0.75);line-height:1.9;font-size:14.5px"><strong style="color:#fff">قياس الأثر:</strong> بإعادة الأداة بعد التكوين، تظهر للطالب نسبة تحسّنه تلقائيًا — دليل أثر ملموس بدون أي نظام قياس خاص بكم.</p>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-qrcode text-lg mt-1" style="color:var(--accent-400)"></i>
+                        <p style="color:rgba(255,255,255,0.75);line-height:1.9;font-size:14.5px"><strong style="color:#fff">توزيع ميداني:</strong> اطبعوا رمز QR للموقع وعلّقوه في قاعات التكوين ليصل الطلبة للأداة مباشرة من هواتفهم.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rounded-2xl p-7 sm:p-9" style="background:#fff">
+                <h3 class="font-heading text-xl mb-2" style="color:var(--primary-900);font-weight:700">طلب اعتماد أو تواصل</h3>
+                <p class="mb-6" style="color:var(--muted);font-size:14.5px;line-height:1.9">
+                    عبّئوا النموذج التالي وستصل رسالتكم مباشرة إلى بريدنا الإلكتروني للتواصل معكم بخصوص اعتماد الأداة أو التنسيق لبرنامج تكويني.
+                </p>
+                <!-- رابط نموذج Formspree الخاص بالمشروع (مفعّل) -->
+                <form id="libraryForm" action="https://formspree.io/f/xaeyyadg" method="POST">
+                    <div class="grid sm:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block mb-2 text-sm font-bold" style="color:var(--primary-900)">اسم المكتبة / الكلية</label>
+                            <input type="text" name="اسم_المكتبة" required class="lib-input" placeholder="مثال: مكتبة كلية العلوم الإنسانية">
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-bold" style="color:var(--primary-900)">الجامعة</label>
+                            <input type="text" name="الجامعة" required class="lib-input" placeholder="مثال: جامعة الجزائر 02">
+                        </div>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block mb-2 text-sm font-bold" style="color:var(--primary-900)">البريد الإلكتروني للتواصل</label>
+                            <input type="email" name="البريد_الإلكتروني" required class="lib-input" placeholder="name@example.com">
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-bold" style="color:var(--primary-900)">عدد الطلبة المستهدف تقريبًا</label>
+                            <input type="text" name="عدد_الطلبة" class="lib-input" placeholder="مثال: 150 طالبًا">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block mb-2 text-sm font-bold" style="color:var(--primary-900)">رسالتكم</label>
+                        <textarea name="الرسالة" rows="4" class="lib-input" placeholder="أخبرونا عن اهتمامكم أو استفساركم..."></textarea>
+                    </div>
+                    <button type="submit" class="restart" style="margin:0;width:100%;justify-content:center;display:flex">
+                        <i class="fas fa-comments"></i> إرسال الطلب
+                    </button>
+                </form>
+            </div>
+
+            <div class="text-center mt-10">
+                <button class="back" data-nav="home" data-target="home" style="background:rgba(255,255,255,0.08);color:#fff;border-color:rgba(255,255,255,0.2)">
+                    <i class="fas fa-house"></i> العودة للموقع
+                </button>
+            </div>
+        </div>
+    </section>
+</div><!-- /page-libraries -->
 
 <!-- ============ الصفحة الثانية: أداة التقييم الذاتي ============ -->
 <div id="page-quiz">
@@ -831,31 +1053,59 @@
             <h1 class="font-heading text-3xl sm:text-4xl mb-3" style="color:var(--primary-900);font-weight:800">ملف الثقافة الرقمية</h1>
             <p class="lead" style="margin:0 auto">نتيجة التقييم الذاتي للكفاءات الرقمية في البيئة الأكاديمية.</p>
             <div class="scoreHero">
-                <div class="circle">
-                    <span id="total">0.00</span>
-                    <small>/ 5</small>
+                <div class="gauge-wrap main-gauge">
+                    <svg viewBox="0 0 220 220">
+                        <defs>
+                            <linearGradient id="mainGaugeGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#D4A843"/>
+                                <stop offset="50%" stop-color="#8FB98E"/>
+                                <stop offset="100%" stop-color="#12A68E"/>
+                            </linearGradient>
+                        </defs>
+                        <path class="gauge-track" d="M 175.054 44.946 A 92 92 0 1 0 175.054 175.054"/>
+                        <path class="gauge-value" id="mainGaugeValue" pathLength="1" d="M 175.054 44.946 A 92 92 0 1 0 175.054 175.054" stroke="url(#mainGaugeGrad)"/>
+                    </svg>
+                    <div class="gauge-center">
+                        <span id="total">0.00</span>
+                        <small>/ 5</small>
+                    </div>
                 </div>
                 <div>
                     <div style="color:rgba(255,255,255,0.6);font-size:14px">مستوى الثقافة الرقمية العام</div>
                     <div class="rlevel" id="level"></div>
                 </div>
             </div>
+            <div id="compareBadgeWrap" style="text-align:center"></div>
             <div class="rgrid" id="grid"></div>
             <div class="box">
                 <h3>ماذا تعني نتيجتك؟</h3>
                 <p id="interpretation"></p>
             </div>
+            <div class="box" id="priorityBox" style="border:2px solid var(--accent-400);background:var(--accent-50)">
+                <h3><i class="fas fa-bullseye" style="color:var(--accent-500);margin-left:6px"></i> أولوية التطوير القادمة</h3>
+                <p id="priorityIntro" style="margin-bottom:16px"></p>
+                <button id="goToAxisBtn" class="btn-outline" style="display:inline-flex;align-items:center;gap:8px;background:#fff">
+                    <i class="fas fa-book-open"></i> اطّلع على تفاصيل هذا المحور ضمن الاستراتيجية
+                </button>
+            </div>
             <div class="box">
                 <h3>مجالات التطوير المقترحة</h3>
                 <div id="recommendations"></div>
             </div>
-            <div class="box">
+            <div class="box" id="nextStepBox">
                 <h3>الخطوة التالية</h3>
-                <p>يمكنك استخدام هذه النتيجة للتعرف على المجالات التي تحتاج إلى مزيد من التدريب والتطوير ضمن محاور الاستراتيجية الوطنية للثقافة الرقمية.</p>
+                <p id="nextStepText"></p>
             </div>
             <div class="flex flex-wrap items-center justify-center gap-3 mt-8">
                 <button class="restart" id="restart" style="margin:0"><i class="fas fa-rotate-right"></i> إعادة التقييم</button>
                 <button class="back" data-nav="home" data-target="home"><i class="fas fa-house"></i> العودة للموقع</button>
+            </div>
+            <div class="result-actions">
+                <input type="text" id="studentNameInput" placeholder="اسمك (اختياري — يُضاف على صورة النتيجة)" style="border:1px solid var(--border);border-radius:12px;padding:11px 16px;font-family:'Tajawal',sans-serif;font-size:14px;background:#fff;min-width:240px">
+            </div>
+            <div class="result-actions">
+                <button class="btn-download" id="downloadResult"><i class="fas fa-download"></i> تنزيل النتيجة كصورة</button>
+                <button class="btn-share" id="shareResult"><i class="fas fa-comments"></i> مشاركة الأداة</button>
             </div>
         </section>
 
@@ -887,15 +1137,70 @@
     const toast = document.getElementById('toast');
     const pageHome = document.getElementById('page-home');
     const pageQuiz = document.getElementById('page-quiz');
+    const pageLibraries = document.getElementById('page-libraries');
+
+    /* =====================================================================
+       المكتبات الشريكة المعتمدة — عدّل هذه القائمة يدويًا كلما انضمت مكتبة جديدة.
+       كل عنصر: { name: 'اسم المكتبة', university: 'الجامعة', refCode: 'رمز الإحالة' }
+       refCode يُستخدم في رابط الإحالة المخصص: ?lib=refCode
+    ===================================================================== */
+    const PARTNER_LIBRARIES = [
+        // مثال (احذف التعليق وعدّل عند إضافة أول مكتبة فعلية):
+        // { name: 'مكتبة كلية العلوم الإنسانية', university: 'جامعة الجزائر 02', refCode: 'flsh-alger2' }
+    ];
+
+    function renderPartners() {
+        const list = document.getElementById('partnersList');
+        const empty = document.getElementById('partnersEmpty');
+        if (!list || !empty) return;
+        if (PARTNER_LIBRARIES.length === 0) {
+            list.style.display = 'none';
+            empty.style.display = 'block';
+            return;
+        }
+        empty.style.display = 'none';
+        list.style.display = 'grid';
+        list.innerHTML = PARTNER_LIBRARIES.map(function(lib) {
+            return "<div class='rcard axis-1' style='text-align:center'>" +
+                "<i class='fas fa-university text-2xl' style='color:var(--a1-primary);margin-bottom:10px;display:block'></i>" +
+                "<strong style='display:block;font-family:Cairo,sans-serif;font-size:15px'>" + lib.name + "</strong>" +
+                "<span style='font-size:13px;color:var(--muted)'>" + lib.university + "</span>" +
+                "</div>";
+        }).join('');
+    }
+    renderPartners();
+
+    /* ===== رابط الإحالة المخصص للمكتبات (?lib=رمز) ===== */
+    var referredLibrary = null;
+    (function detectReferral() {
+        try {
+            const params = new URLSearchParams(window.location.search);
+            const ref = params.get('lib');
+            if (!ref) return;
+            const match = PARTNER_LIBRARIES.find(function(l) { return l.refCode === ref; });
+            if (match) {
+                referredLibrary = match;
+                const banner = document.createElement('div');
+                banner.style.cssText = 'background:linear-gradient(90deg,var(--primary-700),var(--primary-600));color:#fff;text-align:center;padding:10px 16px;font-size:14px;font-weight:bold;position:relative;z-index:60';
+                banner.innerHTML = "<i class='fas fa-university'></i> تصلك هذه الأداة بالتعاون مع " + match.name + " — " + match.university;
+                document.body.insertBefore(banner, document.body.firstChild);
+            }
+        } catch (e) { /* تجاهل بصمت إن لم يكن URLSearchParams مدعومًا */ }
+    })();
 
     /* ===== تبديل الصفحات ===== */
     function goToPage(page, target) {
+        pageHome.style.display = 'none';
+        pageQuiz.style.display = 'none';
+        pageLibraries.style.display = 'none';
+
         if (page === 'quiz') {
-            pageHome.style.display = 'none';
             pageQuiz.style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'auto' });
+        } else if (page === 'libraries') {
+            pageLibraries.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'auto' });
         } else {
-            pageQuiz.style.display = 'none';
             pageHome.style.display = 'block';
             if (target && target !== 'home') {
                 requestAnimationFrame(function() {
@@ -907,6 +1212,22 @@
             }
         }
         onScroll();
+    }
+
+    /* ===== الانتقال إلى تفاصيل محور محدد ضمن قسم "محاور الاستراتيجية" ===== */
+    function goToAxisDetail(axisIndex) {
+        goToPage('home', 'axes');
+        const cardId = 'axisDetail' + (axisIndex + 1);
+        requestAnimationFrame(function() {
+            setTimeout(function() {
+                document.querySelectorAll('[data-axis]').forEach(function(c) { c.classList.remove('open'); });
+                const card = document.getElementById(cardId);
+                if (card) {
+                    card.classList.add('open');
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 60);
+        });
     }
 
     document.querySelectorAll('[data-nav]').forEach(function(el) {
@@ -978,6 +1299,138 @@
         entries.forEach(function(entry) { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
     document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+    /* ===== الأسئلة الشائعة (Accordion) ===== */
+    document.querySelectorAll('.faq-q').forEach(function(q) {
+        q.addEventListener('click', function() {
+            var item = q.closest('.faq-item');
+            var wasOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(function(x) { x.classList.remove('open'); });
+            if (!wasOpen) item.classList.add('open');
+        });
+    });
+
+    /* ===== مقارنة النتيجة بمحاولة سابقة (localStorage) ===== */
+    const RESULT_STORAGE_KEY = 'dlq_last_result_v1';
+    function renderCompareBadge(total) {
+        const wrap = $('compareBadgeWrap');
+        wrap.innerHTML = '';
+        let prev = null;
+        try {
+            const raw = localStorage.getItem(RESULT_STORAGE_KEY);
+            if (raw) prev = JSON.parse(raw);
+        } catch (e) { prev = null; }
+
+        if (prev && typeof prev.total === 'number') {
+            const diff = total - prev.total;
+            const absDiff = Math.abs(diff).toFixed(2);
+            let cls = 'same', icon = 'fa-minus', msg = 'نفس مستوى محاولتك السابقة';
+            if (diff > 0.03) { cls = 'up'; icon = 'fa-arrow-up'; msg = 'تحسّن بمقدار ' + absDiff + ' عن محاولتك السابقة (' + prev.total.toFixed(2) + ')'; }
+            else if (diff < -0.03) { cls = 'down'; icon = 'fa-arrow-down'; msg = 'تراجع بمقدار ' + absDiff + ' عن محاولتك السابقة (' + prev.total.toFixed(2) + ')'; }
+            const badge = document.createElement('div');
+            badge.className = 'compare-badge ' + cls;
+            badge.innerHTML = "<i class='fas " + icon + "'></i> " + msg;
+            wrap.appendChild(badge);
+        }
+
+        try {
+            localStorage.setItem(RESULT_STORAGE_KEY, JSON.stringify({ total: total, date: new Date().toISOString() }));
+        } catch (e) { /* localStorage غير متاح - تجاهل بصمت */ }
+    }
+
+    /* ===== تنزيل النتيجة كصورة (Canvas) ===== */
+    function drawGaugeOnCanvas(ctx, cx, cy, r, lineWidth, fraction, trackColor, colorStart, colorEnd) {
+        const startAngle = 135 * Math.PI / 180;
+        const sweep = 270 * Math.PI / 180;
+        ctx.lineCap = 'round';
+        ctx.lineWidth = lineWidth;
+        ctx.strokeStyle = trackColor;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, startAngle, startAngle + sweep, false);
+        ctx.stroke();
+
+        const grad = ctx.createLinearGradient(cx - r, cy + r, cx + r, cy - r);
+        grad.addColorStop(0, colorStart);
+        grad.addColorStop(1, colorEnd);
+        ctx.strokeStyle = grad;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, startAngle, startAngle + sweep * Math.max(fraction, 0.012), false);
+        ctx.stroke();
+    }
+
+    function buildResultCanvas(total, scores, studentName) {
+        const W = 900, H = 1080;
+        const canvas = document.createElement('canvas');
+        canvas.width = W; canvas.height = H;
+        const ctx = canvas.getContext('2d');
+
+        // خلفية
+        const bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+        bgGrad.addColorStop(0, '#062A35');
+        bgGrad.addColorStop(0.42, '#062A35');
+        bgGrad.addColorStop(0.42, '#F7F5F0');
+        bgGrad.addColorStop(1, '#F7F5F0');
+        ctx.fillStyle = bgGrad;
+        ctx.fillRect(0, 0, W, H);
+
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = 'bold 26px Cairo, sans-serif';
+        ctx.fillText('بطاقة نتيجة تقييم الثقافة الرقمية', W / 2, 68);
+        ctx.font = '16px Tajawal, sans-serif';
+        ctx.fillStyle = 'rgba(255,255,255,0.65)';
+        ctx.fillText('الاستراتيجية الوطنية لبرامج تدريب الثقافة الرقمية', W / 2, 98);
+
+        var offsetY = 0;
+        if (studentName && studentName.trim()) {
+            ctx.font = 'bold 19px Cairo, sans-serif';
+            ctx.fillStyle = '#D4A843';
+            ctx.fillText('الطالب(ة): ' + studentName.trim(), W / 2, 132);
+            offsetY = 34;
+        }
+
+        drawGaugeOnCanvas(ctx, W / 2, 270 + offsetY, 140, 20, total / 5, 'rgba(255,255,255,0.14)', '#D4A843', '#12A68E');
+        ctx.font = 'bold 64px Cairo, sans-serif';
+        ctx.fillStyle = '#D4A843';
+        ctx.fillText(total.toFixed(2), W / 2, 288 + offsetY);
+        ctx.font = '18px Tajawal, sans-serif';
+        ctx.fillStyle = 'rgba(255,255,255,0.6)';
+        ctx.fillText('من 5', W / 2, 316 + offsetY);
+
+        ctx.font = 'bold 28px Cairo, sans-serif';
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillText(levelOf(total), W / 2, 430 + offsetY);
+
+        const axisColors = [
+            ['#12A68E', '#0E6A7E'],
+            ['#3FC4AF', '#0F766E'],
+            ['#D4A843', '#C8963E'],
+            ['#0E6A7E', '#0C4A5E']
+        ];
+        const startY = 560 + offsetY, rowH = 118, gaugeR = 42, gaugeX = 110;
+        scores.forEach(function(s, i) {
+            const cy = startY + i * rowH;
+            drawGaugeOnCanvas(ctx, gaugeX, cy, gaugeR, 10, s / 5, '#E2DFD8', axisColors[i][0], axisColors[i][1]);
+            ctx.font = 'bold 20px Cairo, sans-serif';
+            ctx.fillStyle = '#1A1D23';
+            ctx.fillText(s.toFixed(2), gaugeX, cy + 7);
+
+            ctx.textAlign = 'right';
+            ctx.font = 'bold 21px Cairo, sans-serif';
+            ctx.fillStyle = '#0C4A5E';
+            ctx.fillText(axes[i].title, W - 60, cy - 6);
+            ctx.font = '15px Tajawal, sans-serif';
+            ctx.fillStyle = '#5A5F6B';
+            ctx.fillText('المستوى: ' + levelOf(s), W - 60, cy + 22);
+            ctx.textAlign = 'center';
+        });
+
+        ctx.font = '14px Tajawal, sans-serif';
+        ctx.fillStyle = '#9CA3AF';
+        ctx.fillText('معهد علم المكتبات والتوثيق — جامعة الجزائر 02  •  ' + new Date().toLocaleDateString('ar-DZ'), W / 2, H - 40);
+
+        return canvas;
+    }
 
     /* ===== Toast ===== */
     var toastTimeout = null;
@@ -1138,22 +1591,79 @@
         return 'منخفض جدًا';
     }
 
+    /* ===== مؤشرات السرعة الدائرية (Gauges) ===== */
+    var MINI_GAUGE_PATH = "M 78.284 21.716 A 40 40 0 1 0 78.284 78.284";
+    var AXIS_GRADIENTS = {
+        1: ['var(--a1-secondary)', 'var(--a1-primary)'],
+        2: ['var(--a2-secondary)', 'var(--a2-primary)'],
+        3: ['var(--a3-secondary)', 'var(--a3-primary)'],
+        4: ['var(--a4-secondary)', 'var(--a4-primary)']
+    };
+
+    function animateNumber(el, from, to, duration, suffix) {
+        var start = null;
+        function step(ts) {
+            if (!start) start = ts;
+            var p = Math.min((ts - start) / duration, 1);
+            var eased = 1 - Math.pow(1 - p, 3);
+            var val = from + (to - from) * eased;
+            el.textContent = val.toFixed(2) + (suffix || '');
+            if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    }
+
     function showResults() {
         pageQuiz.removeAttribute('data-axis');
         const scores = axes.map(function(a, i) { return mean(items.filter(function(x) { return x.axis === i; }).map(function(x) { return x.value; })); });
         const total = mean(scores);
-        $('total').textContent = total.toFixed(2);
         $('level').textContent = levelOf(total);
 
         const grid = $('grid');
         grid.innerHTML = '';
         scores.forEach(function(s, i) {
+            const grad = AXIS_GRADIENTS[i + 1];
+            const gradId = 'gradAxis' + (i + 1);
             const c = document.createElement('div');
             c.className = 'rcard axis-' + (i + 1);
-            c.innerHTML = "<div class='row'><span>" + axes[i].title + "</span><strong>" + s.toFixed(2) + "</strong></div>" +
-                "<div class='meter'><span style='width:" + (s / 5 * 100) + "%'></span></div>" +
-                "<small style='font-weight:bold'>المستوى: " + levelOf(s) + "</small>";
+            c.innerHTML =
+                "<div class='gauge-row'>" +
+                    "<div class='gauge-wrap mini-gauge'>" +
+                        "<svg viewBox='0 0 100 100'>" +
+                            "<defs><linearGradient id='" + gradId + "' x1='0%' y1='100%' x2='100%' y2='0%'>" +
+                                "<stop offset='0%' stop-color='" + grad[0] + "'/>" +
+                                "<stop offset='100%' stop-color='" + grad[1] + "'/>" +
+                            "</linearGradient></defs>" +
+                            "<path class='gauge-track' d='" + MINI_GAUGE_PATH + "'/>" +
+                            "<path class='gauge-value' pathLength='1' d='" + MINI_GAUGE_PATH + "' stroke='url(#" + gradId + ")' id='miniGaugeValue" + i + "'/>" +
+                        "</svg>" +
+                        "<div class='gauge-center'><strong id='miniGaugeNum" + i + "'>0.00</strong></div>" +
+                    "</div>" +
+                    "<div class='gauge-info'>" +
+                        "<span class='gi-title'>" + axes[i].title + "</span>" +
+                        "<span class='gi-level'>المستوى: " + levelOf(s) + "</span>" +
+                    "</div>" +
+                "</div>";
             grid.appendChild(c);
+        });
+
+        // تشغيل أنيميشن الامتلاء والعدّاد الرقمي بعد إدراج العناصر في DOM
+        var mainGaugeEl = $('mainGaugeValue');
+        mainGaugeEl.style.transition = 'none';
+        mainGaugeEl.style.strokeDashoffset = '1';
+        void mainGaugeEl.getBoundingClientRect();
+        mainGaugeEl.style.transition = '';
+        requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+                mainGaugeEl.style.strokeDashoffset = String(1 - (total / 5));
+                animateNumber($('total'), 0, total, 1500, '');
+                scores.forEach(function(s, i) {
+                    const valPath = document.getElementById('miniGaugeValue' + i);
+                    if (valPath) valPath.style.strokeDashoffset = String(1 - (s / 5));
+                    const numEl = document.getElementById('miniGaugeNum' + i);
+                    if (numEl) animateNumber(numEl, 0, s, 1300, '');
+                });
+            });
         });
 
         const best = scores.indexOf(Math.max.apply(null, scores));
@@ -1164,6 +1674,9 @@
             ') كأعلى المجالات أداءً لديك، بينما يمثل (' + axes[weak].title +
             ') المجال الذي يستحق مزيدًا من التطوير والممارسة.';
 
+        $('priorityIntro').innerHTML = 'بناءً على نتيجتك، محور <strong>' + axes[weak].title + '</strong> هو الأولى بالتركيز عليه الآن. يمكنك مراجعة تفاصيل هذا المحور ضمن الاستراتيجية للتعرف أكثر على أبعاده ومكوناته.';
+        $('goToAxisBtn').onclick = function() { goToAxisDetail(weak); };
+
         $('recommendations').innerHTML = scores.map(function(s, i) {
             var text = s >= 3.4 ?
                 'يمثل هذا المجال نقطة قوة نسبية لديك؛ استمر في تطويره وتوظيفه أكاديميًا بشكل مستمر.' :
@@ -1172,6 +1685,13 @@
                 'يمثل هذا المجال أولوية للتطوير، ويستحسن التركيز عليه من خلال دورات تدريبية وتطبيقات عملية موجهة.';
             return "<div class='rec axis-" + (i + 1) + "'><strong>" + axes[i].title + "</strong><p>" + text + "</p></div>";
         }).join('');
+
+        renderCompareBadge(total);
+
+        const libName = referredLibrary ? referredLibrary.name : 'مكتبة كليتك';
+        $('nextStepText').textContent =
+            'يمكنك استخدام هذه النتيجة للتعرف على المجالات التي تحتاج إلى مزيد من التدريب. يُنصح بالتواصل مع ' + libName +
+            ' للاستفسار عن برامج التكوين المتاحة في الثقافة الرقمية، خاصة في محور (' + axes[weak].title + ').';
 
         quizScreen('q-results');
     }
@@ -1185,7 +1705,52 @@
         quizScreen('q-intro');
     };
 
+    /* ===== تنزيل ومشاركة النتيجة ===== */
+    $('downloadResult').onclick = function() {
+        const scores = axes.map(function(a, i) { return mean(items.filter(function(x) { return x.axis === i; }).map(function(x) { return x.value; })); });
+        const total = mean(scores);
+        const studentName = $('studentNameInput') ? $('studentNameInput').value : '';
+        const canvas = buildResultCanvas(total, scores, studentName);
+        canvas.toBlob(function(blob) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'نتيجة-تقييم-الثقافة-الرقمية.png';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(function() { URL.revokeObjectURL(url); }, 2000);
+            showToast('تم تنزيل صورة النتيجة');
+        }, 'image/png');
+    };
+
+    $('shareResult').onclick = function() {
+        const shareData = {
+            title: 'أداة قياس الثقافة الرقمية',
+            text: 'جرّب أداة التقييم الذاتي للثقافة الرقمية ضمن الاستراتيجية الوطنية للثقافة الرقمية:',
+            url: window.location.href
+        };
+        if (navigator.share) {
+            navigator.share(shareData).catch(function() {});
+        } else if (navigator.clipboard) {
+            navigator.clipboard.writeText(shareData.text + ' ' + shareData.url).then(function() {
+                showToast('تم نسخ رابط الأداة — شاركه مع زملائك');
+            }).catch(function() {
+                showToast('تعذّر نسخ الرابط، يمكنك نسخه يدويًا من شريط العنوان');
+            });
+        } else {
+            showToast('انسخ رابط الصفحة من شريط العنوان لمشاركته');
+        }
+    };
+
     onScroll();
 </script>
+
+<!--
+  إحصائيات زيارات مجهولة الهوية عبر Vercel Web Analytics (مجانية).
+  فعّلها من: لوحة تحكم مشروعك على Vercel ← Analytics ← Enable.
+  لا تحتاج أي مفتاح أو إعداد إضافي؛ السطر التالي يعمل تلقائيًا فور التفعيل من لوحة التحكم.
+-->
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
