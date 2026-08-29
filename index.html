@@ -415,11 +415,6 @@
         .box { margin-top:20px; border-radius:20px; padding:24px; background:#fff; border:1px solid var(--border); text-align:right; box-shadow:0 4px 15px rgba(6,42,53,.03); }
         .box h3 { color:var(--primary-900); margin-bottom:12px; }
         .box p { color:#475569; line-height:1.9; margin:0; }
-        .rec { padding:15px; border-radius:14px; margin-bottom:10px; background:var(--bg); border-right:4px solid var(--muted); }
-        .rec.axis-1{border-right-color:var(--a1-primary);background:var(--a1-bg)}
-        .rec.axis-2{border-right-color:var(--a2-primary);background:var(--a2-bg)}
-        .rec.axis-3{border-right-color:var(--a3-primary);background:var(--a3-bg)}
-        .rec.axis-4{border-right-color:var(--a4-primary);background:var(--a4-bg)}
         .rec strong { display:block; margin-bottom:4px; color:var(--primary-900); }
         .rec p { margin:0; font-size:14px; color:#334155; }
         .restart { display:block; margin:30px auto 0; padding:14px 32px; border:0; border-radius:14px; background:linear-gradient(135deg,var(--primary-500),var(--primary-700)); color:#fff; font-family:'Cairo',sans-serif; font-weight:bold; cursor:pointer; transition:.2s; }
@@ -1169,10 +1164,6 @@
                     <i class="fas fa-book-open"></i> اطّلع على تفاصيل هذا المحور ضمن الاستراتيجية
                 </button>
             </div>
-            <div class="box">
-                <h3>مجالات التطوير المقترحة</h3>
-                <div id="recommendations"></div>
-            </div>
             <div class="box" id="nextStepBox">
                 <h3>الخطوة التالية</h3>
                 <p id="nextStepText"></p>
@@ -1442,8 +1433,36 @@
         ctx.stroke();
     }
 
-    function buildResultCanvas(total, scores, studentName) {
-        const W = 900, H = 1080;
+    function drawRoundedRect(ctx, x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + w, y, x + w, y + h, r);
+        ctx.arcTo(x + w, y + h, x, y + h, r);
+        ctx.arcTo(x, y + h, x, y, r);
+        ctx.arcTo(x, y, x + w, y, r);
+        ctx.closePath();
+    }
+
+    function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
+        const words = text.split(' ');
+        let line = '';
+        let cy = y;
+        for (var n = 0; n < words.length; n++) {
+            const testLine = line + words[n] + ' ';
+            if (ctx.measureText(testLine).width > maxWidth && line !== '') {
+                ctx.fillText(line.trim(), x, cy);
+                line = words[n] + ' ';
+                cy += lineHeight;
+            } else {
+                line = testLine;
+            }
+        }
+        ctx.fillText(line.trim(), x, cy);
+        return cy;
+    }
+
+    function buildResultCanvas(total, scores, studentName, weakAxisIndex) {
+        const W = 900, H = 1230;
         const canvas = document.createElement('canvas');
         canvas.width = W; canvas.height = H;
         const ctx = canvas.getContext('2d');
@@ -1509,6 +1528,30 @@
             ctx.textAlign = 'center';
         });
 
+        // ===== صندوق "أولوية التطوير القادمة" =====
+        if (typeof weakAxisIndex === 'number' && axes[weakAxisIndex]) {
+            const boxY = startY + 4 * rowH - 12;
+            const boxX = 60, boxW = W - 120, boxH = 150;
+            ctx.fillStyle = '#FFF8EB';
+            drawRoundedRect(ctx, boxX, boxY, boxW, boxH, 18);
+            ctx.fill();
+            ctx.strokeStyle = '#D4A843';
+            ctx.lineWidth = 2.5;
+            drawRoundedRect(ctx, boxX, boxY, boxW, boxH, 18);
+            ctx.stroke();
+
+            ctx.textAlign = 'center';
+            ctx.font = 'bold 22px Cairo, sans-serif';
+            ctx.fillStyle = '#8A6420';
+            ctx.fillText('🎯 أولوية التطوير القادمة', W / 2, boxY + 38);
+
+            ctx.font = '16px Tajawal, sans-serif';
+            ctx.fillStyle = '#5A5F6B';
+            const priorityText = 'بناءً على النتيجة، محور ' + axes[weakAxisIndex].title + ' هو الأولى بالتركيز عليه الآن.';
+            wrapCanvasText(ctx, priorityText, W / 2, boxY + 74, boxW - 60, 26);
+        }
+
+        ctx.textAlign = 'center';
         ctx.font = '14px Tajawal, sans-serif';
         ctx.fillStyle = '#9CA3AF';
         ctx.fillText('معهد علم المكتبات والتوثيق — جامعة الجزائر 02  •  ' + new Date().toLocaleDateString('ar-DZ'), W / 2, H - 40);
@@ -1761,15 +1804,6 @@
         $('priorityIntro').innerHTML = 'بناءً على نتيجتك، محور <strong>' + axes[weak].title + '</strong> هو الأولى بالتركيز عليه الآن. يمكنك مراجعة تفاصيل هذا المحور ضمن الاستراتيجية للتعرف أكثر على أبعاده ومكوناته.';
         $('goToAxisBtn').onclick = function() { goToAxisDetail(weak); };
 
-        $('recommendations').innerHTML = scores.map(function(s, i) {
-            var text = s >= 3.4 ?
-                'يمثل هذا المجال نقطة قوة نسبية لديك؛ استمر في تطويره وتوظيفه أكاديميًا بشكل مستمر.' :
-                s >= 2.6 ?
-                'لديك أساس مقبول، ويمكن تطوير هذا المجال من خلال التدريب والممارسة المنتظمة مع الأدوات الحديثة.' :
-                'يمثل هذا المجال أولوية للتطوير، ويستحسن التركيز عليه من خلال دورات تدريبية وتطبيقات عملية موجهة.';
-            return "<div class='rec axis-" + (i + 1) + "'><strong>" + axes[i].title + "</strong><p>" + text + "</p></div>";
-        }).join('');
-
         renderCompareBadge(total);
 
         const libName = referredLibrary ? referredLibrary.name : 'مكتبة كليتك';
@@ -1793,8 +1827,9 @@
     $('downloadResult').onclick = function() {
         const scores = axes.map(function(a, i) { return mean(items.filter(function(x) { return x.axis === i; }).map(function(x) { return x.value; })); });
         const total = mean(scores);
+        const weakAxisIndex = scores.indexOf(Math.min.apply(null, scores));
         const studentName = $('studentNameInput') ? $('studentNameInput').value : '';
-        const canvas = buildResultCanvas(total, scores, studentName);
+        const canvas = buildResultCanvas(total, scores, studentName, weakAxisIndex);
         canvas.toBlob(function(blob) {
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
